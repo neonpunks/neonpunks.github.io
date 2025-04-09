@@ -35,6 +35,5 @@ When I’m not coding or breaking things, I’m usually:
 Feel free to reach out if you want to chat about **tech**, **security**, or just **cool projects** you’re working on. You can find me on:
 
 - **GitHub**: [yashyadav711](https://github.com/yashyadav711)
-- **LinkedIn**: [Yash Yadav](https://linkedin.com/in/yash-yadav711)
 
 That’s it for now! I’ll keep adding more as I go, so keep an eye out for updates. 😎
