@@ -1,33 +1,185 @@
 ---
-title: "One Liners"
+title: "Hacking One Liners"
 date: 2025-04-10 +0530
 categories: [Cyber-Security]
-tags: [anew, nuclei, target, subs, silent, subfinder]
+tags: [one-liners, subfinder, httpx, nuclei, ffuf, gau, gospider, naabu, bash, shuffledns, dnsx, notify, recon, automation, js, token-hunting]
 order: 3
 ---
 
+A curated collection of powerful, compact one-liners used throughout reconnaissance, scanning, and early exploitation workflows. These are quick-fire tools for chaining recon steps, automating scans, or rapidly discovering weak points.
+
 ---
-description: Things that are unfinished or don't know where to put them.
----
 
-# Random Stuff
+## 🔍 Subdomains → Live Hosts → Scan
 
-## Nuclei
+```bash
+subfinder -d example.com -silent | httpx -silent | nuclei -silent -t ~/nuclei-templates -o results.txt
+```
 
-cat domains.txt | httpx -silent | xargs -n 1 gospider -o output -s ; cat output/\* | egrep -o 'https?://\[^ ]+' | nuclei -t \~/nuclei-templates/ -o result.txt
+## 🔁 Passive URLs → Filter → Nuclei
 
-## Heavy (Needs Dependencies installed first and then needs tweeking)
+```bash
+gau example.com | grep -iE '\.php|\.asp|\.aspx|\.jsp' | httpx -silent | nuclei -silent -o tech-findings.txt
+```
 
-subfinder -d jora.com -silent | anew target-subs.txt | dnsx -resp -silent | anew target-alive-subs-ip.txt | awk '{print $1}' | anew target-alive-subs.txt | naabu -top-ports 1000 -silent | anew target-openports.txt | cut -d ":" -f1 | naabu -passive -silent | anew target-openports.txt | httpx -silent -title -status-code -mc 200,403,400,500 | anew target-web-alive.txt | awk '{print $1}' | gospider -t 10 -q -o targetcrawl | anew target-crawled.txt | unfurl format %s://dtp | httpx -silent -title -status-code -mc 403,400,500 | anew target-crawled-interesting.txt | awk '{print $1}' | gau --blacklist eot,svg,woff,ttf,png,jpg,gif,otf,bmp,pdf,mp3,mp4,mov --subs | anew target-gau.txt | httpx -silent -title -status-code -mc 200,403,400,500 | anew target-web-alive.txt | awk '{print $1}'| nuclei -eid expired-ssl,tls-version,ssl-issuer,deprecated-tls,revoked-ssl-certificate,self-signed-ssl,kubernetes-fake-certificate,ssl-dns-names,weak-cipher-suites,mismatched-ssl-certificate,untrusted-root-certificate,metasploit-c2,openssl-detect,default-ssltls-test-page,wordpress-really-simple-ssl,wordpress-ssl-insecure-content-fixer,cname-fingerprint,mx-fingerprint,txt-fingerprint,http-missing-security-headers,nameserver-fingerprint,caa-fingerprint,ptr-fingerprint,wildcard-postmessage,symfony-fosjrouting-bundle,exposed-sharepoint-list,CVE-2022-1595,CVE-2017-5487,weak-cipher-suites,unauthenticated-varnish-cache-purge,dwr-index-detect,sitecore-debug-page,python-metrics,kubernetes-metrics,loqate-api-key,kube-state-metrics,postgres-exporter-metrics,CVE-2000-0114,node-exporter-metrics,kube-state-metrics,prometheus-log,express-stack-trace,apache-filename-enum,debug-vars,elasticsearch,springboot-loggers -ss template-spray | notify -silent
+## ⚡ Quick Port Discovery + Probing
 
-## One liner
+```bash
+naabu -host example.com -top-ports 100 | httpx -silent -title -status-code
+```
 
-subfinder -d redacted.com -all | anew subs.txt; shuffledns -d redacted.com -r resolvers.txt -w n0kovo\_subdomains\_huge.txt | anew subs.txt; dnsx -l subs.txt -r resolvers.txt | anew resolved.txt; naabu -l resolved.txt -nmap -rate 5000 | anew ports.txt; httpx -l ports .txt | anew alive.txt; katana -list alive.txt -kf all -jc | anew urls.txt; nuclei -l urls.txt -es info, unknown -ept ssl -ss template-spray | anew nuclei.txt
+## 🕸️ Subdomains → Resolve → Probing → Nuclei
 
-## Nuclei Tweaks
+```bash
+subfinder -d example.com -silent | dnsx -silent | httpx -silent | nuclei -t cves/ -o cve-scan.txt
+```
 
-nuclei -t \~/nuclei-templates/ -o result.txt -rl 20 -mhe 10 -es info -c 10 -no-verify
+## 🧪 Wordlist Fuzz → Live Endpoint Test
 
-## One Liner
+```bash
+ffuf -u https://example.com/FUZZ -w common.txt -mc 200 | awk '{print $1}' | httpx -silent | nuclei -o ffuf-discovered.txt
+```
 
-subfinder -d opensea.com -all | anew subs.txt; shuffledns -d opensea.com -r resolvers.txt -w n0kovo\_subdomains\_huge.txt | anew subs.txt; dnsx -l subs.txt -r resolvers.txt | anew resolved.txt; naabu -l resolved.txt -nmap -rate 5000 | anew ports.txt; httpx -l ports .txt | anew alive.txt; katana -list alive.txt -kf all -jc | anew urls.txt; nuclei -l urls.txt -es info, unknown -ept ssl -ss template-spray | anew nuclei.txt
+## 🧠 Passive + Active URL Collect + Scan
+
+```bash
+(subfinder -d example.com; gau example.com) | sort -u | httpx -silent | nuclei -o passive-active-results.txt
+```
+
+## 🧼 Filter JavaScript Files for Review
+
+```bash
+gau example.com | grep '\.js$' | sort -u | httpx -silent -mc 200 | tee js-live.txt
+```
+
+## 🛠️ Crawl → Extract URLs → Scan
+
+```bash
+gospider -s https://example.com -t 10 -q | grep -oP 'https?://[^ ]+' | httpx -silent | nuclei -silent -o spider-findings.txt
+```
+
+## 🔓 Nuclei Fast Severity Filter
+
+```bash
+cat live.txt | nuclei -severity high,critical -silent -o high-crit.txt
+```
+
+## 🧪 JS → Endpoint Extraction (deep)
+
+```bash
+cat js-live.txt | xargs -n1 -I{} curl -s {} | grep -oP 'https?://[^\"]+' | sort -u
+```
+
+## 🎣 Open Redirect Detection
+
+```bash
+gau target.com | grep "=" | qsreplace 'https://evil.com' | httpx -silent -location -fr -mc 301,302 | grep 'evil.com'
+```
+
+## 🧠 Param Mining + Fuzz
+
+```bash
+gau target.com | uro | grep "=" | gf xss | qsreplace 'FUZZ' | ffuf -u FUZZEDURL -w payloads.txt -mc 200
+```
+
+## 🧪 SSRF Testing
+
+```bash
+cat urls.txt | gf ssrf | qsreplace 'http://your-burp-collab.com' | httpx -silent -fr
+```
+
+## 🪝 XSS Reflected Testing
+
+```bash
+cat urls.txt | grep "=" | qsreplace '<svg onload=alert(1)>' | httpx -silent -mc 200 -sr | grep '<svg onload=alert(1)>'
+```
+
+## 🗂️ Sitemap Extractor
+
+```bash
+curl -s https://target.com/sitemap.xml | grep -oP '(?<=<loc>).*?(?=</loc>)'
+```
+
+## 🗃️ Git Folder Check
+
+```bash
+httpx -l subs.txt -path /.git/config -mc 200
+```
+
+## 🔁 HTTP Method Tester
+
+```bash
+for m in GET POST PUT DELETE OPTIONS TRACE PATCH; do curl -X $m -I https://target.com | grep HTTP; done
+```
+
+## 🧾 Form Extraction
+
+```bash
+cat alive.txt | xargs -n1 -I{} curl -s {} | pup 'form json{}' | jq .
+```
+
+## 🔐 CORS Misconfig Check
+
+```bash
+curl -H 'Origin: https://evil.com' -I https://target.com | grep 'Access-Control-Allow-Origin'
+```
+
+## 🧬 SQLi Prober
+
+```bash
+gau target.com | grep "=" | qsreplace "'" | httpx -silent -mc 500,403,400
+```
+
+## ⚠️ CRLF Injection Test
+
+```bash
+cat urls.txt | qsreplace '%0d%0aPoC:CRLF' | httpx -silent -fr -mc 200 | grep 'PoC:CRLF'
+```
+
+## 📬 Email Discovery
+
+```bash
+gau target.com | xargs -n1 curl -s | grep -Ei '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}' | sort -u
+```
+
+## 🪛 Find Secrets in JS
+
+```bash
+cat js-live.txt | xargs -n1 curl -s | grep -Eo 'API_KEY|api_key|secret|Bearer [A-Za-z0-9\\-_\\.]+' | sort -u
+```
+
+## 📂 Extension/Backup File Discovery
+
+```bash
+gau target.com | grep -iE '\.zip|\.gz|\.sql|\.tar|\.bak' | httpx -silent -mc 200
+```
+
+## 🧾 Wayback Param Harvesting
+
+```bash
+gau target.com | cut -d '?' -f2 | cut -d '&' -f1 | sort -u
+```
+
+## 🔗 Dangling Subdomain Takeover Check
+
+```bash
+subfinder -d target.com -silent | dnsx -a -cname -resp-only | grep -iE 'github|heroku|amazonaws'
+```
+
+## 🪞 Mirror Target Webpage
+
+```bash
+wget --mirror --convert-links --adjust-extension --page-requisites --no-parent https://target.com
+```
+
+## 🧼 Clean Noise from URLs
+
+```bash
+cat all-urls.txt | grep -vE '\.(png|jpg|jpeg|gif|svg|css|ico|woff|ttf|pdf)$' | sort -u
+```
+
+## 🧹 Dedupe + Filter Live URLs
+
+```bash
+cat urls.txt | sort -u | httpx -silent -mc 200 | anew final.txt
+```

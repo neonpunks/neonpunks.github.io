@@ -6,9 +6,7 @@ tags: [injection, resources, your, hacking, github]
 order: 5
 ---
 
----
-description: This page contains variety of resources that will help you in your journey.
----
+This page contains variety of resources that will help you in your journey.
 
 # Resources
 
