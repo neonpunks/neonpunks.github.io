@@ -211,3 +211,4 @@ Pulls `.js` links, removes protocols, deduplicates.
 - `cut`: Extract specific fields from lines
 - `tr`: Translate or delete characters
 - `jq`: Parse JSON output for similar use cases
+
