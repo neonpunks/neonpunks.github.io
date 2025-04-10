@@ -4,6 +4,7 @@ date: 2025-04-10 +0530
 categories: [linux]
 tags: [grep, sed, awk, bash, text-processing, urls, file, filter, recon, csv, httpx]
 order: 1
+image: /assets/images/Linux/Awk-Grep-And-Sed.png
 ---
 
 Handy and efficient one-liners using `awk`, `grep`, and `sed` to clean, parse, and extract data from files — extremely useful for recon output, log files, and automation pipelines.

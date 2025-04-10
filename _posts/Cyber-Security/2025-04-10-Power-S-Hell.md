@@ -4,6 +4,7 @@ date: 2025-04-10 +0530
 categories: [Cyber-Security]
 tags: [powershell, power, hell, history, file, active-directory, windows, recon, ad, lateral-movement, persistence, evasion]
 order: 4
+image: /assets/images/Cyber-Security/Power-S-Hell.png
 ---
 
 This is a collection of PowerShell one-liners for **Active Directory (AD) pentesting**, including recon, enumeration, lateral movement, persistence, evasion, and payload delivery.

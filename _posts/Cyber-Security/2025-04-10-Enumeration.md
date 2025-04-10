@@ -4,6 +4,7 @@ date: 2025-04-10 +0530
 categories: [Cyber-Security]
 tags: [bash, domain, subdomains, seclists, wfuzz, gobuster, ffuf, knockpy, assetfinder, altdns, dirsearch, httpx, aquatone, curl]
 order: 1
+image: /assets/images/Cyber-Security/Enumeration.png
 ---
 
 Subdomain and directory enumeration are key techniques in recon during penetration testing. Below are powerful commands and tools used to identify subdomains, directories, and gather more information from target domains.

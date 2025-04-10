@@ -4,6 +4,7 @@ date: 2025-04-10 +0530
 categories: [Cyber-Security]
 tags: [one-liners, subfinder, httpx, nuclei, ffuf, gau, gospider, naabu, bash, shuffledns, dnsx, notify, recon, automation, js, token-hunting]
 order: 3
+image: /assets/images/Cyber-Security/One-Liners.png
 ---
 
 A curated collection of powerful, compact one-liners used throughout reconnaissance, scanning, and early exploitation workflows. These are quick-fire tools for chaining recon steps, automating scans, or rapidly discovering weak points.

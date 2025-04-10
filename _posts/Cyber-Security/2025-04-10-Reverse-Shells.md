@@ -4,6 +4,7 @@ date: 2025-04-10 +0530
 categories: [Cyber-Security]
 tags: [bash, socat, shell, reverse, tcp, find, sqlmap, linux, shells, one-liners]
 order: 6
+image: /assets/images/Cyber-Security/Reverse-Shells.png
 ---
 
 A reverse shell is a technique where the target machine initiates a connection back to the attacker, allowing remote access even through firewalls. Below are examples, including stabilization tips.

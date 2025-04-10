@@ -4,6 +4,7 @@ date: 2025-04-10 +0530
 categories: [Cyber-Security]
 tags: [injection, resources, your, hacking, github]
 order: 5
+image: /assets/images/Cyber-Security/Resources.png
 ---
 
 This page contains variety of resources that will help you in your journey.
