@@ -3,6 +3,7 @@ title: "Restore Prompts/chats using exported chat"
 date: 2025-04-10 +0530
 categories: [ChatGPT Prompts]
 tags: [prompt, restore, poppy, upload, exported]
+image: /assets/images/Prompts/restorechat.png
 order: 5
 ---
 
