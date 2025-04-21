@@ -9,7 +9,7 @@ image: /assets/images/Linux/Awk-Grep-And-Sed.png
 
 Handy and efficient one-liners using `awk`, `grep`, and `sed` to clean, parse, and extract data from files — extremely useful for recon output, log files, and automation pipelines.
 
-## 🔹 Remove `]` characters from a file
+## Remove `]` characters from a file
 
 ```bash
 sed -i 's/]//g' filename
@@ -20,7 +20,7 @@ sed -i 's/]//g' filename
 
 Deletes all occurrences of `]` in-place from a file.
 
-## 🔹 Strip `http://` and `https://` from URLs
+## Strip `http://` and `https://` from URLs
 
 ```bash
 sed 's|https\?://||g' input.txt > output.txt
@@ -31,7 +31,7 @@ sed 's|https\?://||g' input.txt > output.txt
 
 Removes protocol prefixes from URL lists and saves to a new file.
 
-## 🔹 Extract IP addresses from a file
+## Extract IP addresses from a file
 
 ```bash
 grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' IPs.txt | tee IP_List.txt
@@ -43,7 +43,7 @@ grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}' IPs.txt | tee IP_List.txt
 
 Extracts IPv4 patterns from any file and saves them.
 
-## 🔹 Extract clean domain names
+## Extract clean domain names
 
 ```bash
 grep -Eo '\b([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}\b' input.txt | tee domains.txt
@@ -55,7 +55,7 @@ grep -Eo '\b([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}\b' input.txt | tee domains.txt
 
 Grabs domain names without the URL scheme.
 
-## 🔹 Remove empty lines from a file
+## Remove empty lines from a file
 
 ```bash
 sed '/^$/d' input.txt > no_empty_lines.txt
@@ -66,7 +66,7 @@ sed '/^$/d' input.txt > no_empty_lines.txt
 
 Filters out blank lines from tool output or logs.
 
-## 🔹 Replace colons with spaces
+## Replace colons with spaces
 
 ```bash
 sed 's/:/ /g' raw.txt > formatted.txt
@@ -76,7 +76,7 @@ sed 's/:/ /g' raw.txt > formatted.txt
 
 Transforms colon-separated fields into space-separated.
 
-## 🔹 Get only the path from URLs
+## Get only the path from URLs
 
 ```bash
 cut -d '/' -f4- urls.txt
@@ -87,7 +87,7 @@ cut -d '/' -f4- urls.txt
 
 Removes domain and protocol, leaves just the endpoint/path.
 
-## 🔹 Remove query strings from URLs
+## Remove query strings from URLs
 
 ```bash
 sed 's|\?.*||' urls.txt > stripped.txt
@@ -98,7 +98,7 @@ sed 's|\?.*||' urls.txt > stripped.txt
 
 Removes `?param=value` and everything after.
 
-## 🔹 Count unique domains from URL list
+## Count unique domains from URL list
 
 ```bash
 cut -d '/' -f3 urls.txt | sort | uniq -c | sort -nr
@@ -110,7 +110,7 @@ cut -d '/' -f3 urls.txt | sort | uniq -c | sort -nr
 
 Extracts hostnames and ranks them by frequency.
 
-## 🔹 Grep + Awk: Extract URLs with status 200
+## Grep + Awk: Extract URLs with status 200
 
 ```bash
 grep "200 OK" httpx.txt | awk '{print $1}'
@@ -121,7 +121,7 @@ grep "200 OK" httpx.txt | awk '{print $1}'
 
 Filters out only the URLs with 200 OK responses.
 
-## 🔹 awk: Print 1st and 3rd column
+## awk: Print 1st and 3rd column
 
 ```bash
 awk '{print $1, $3}' input.txt
@@ -132,7 +132,7 @@ awk '{print $1, $3}' input.txt
 
 Example: extract IP + response size from structured logs.
 
-## 🔹 awk with custom delimiter (CSV-style)
+## awk with custom delimiter (CSV-style)
 
 ```bash
 awk -F ',' '{print $2}' data.csv
@@ -143,7 +143,7 @@ awk -F ',' '{print $2}' data.csv
 
 Extracts the second column from comma-separated values.
 
-## 🔹 awk: Match keyword, print field
+## awk: Match keyword, print field
 
 ```bash
 awk '/login/ {print $1}' logs.txt
@@ -154,7 +154,7 @@ awk '/login/ {print $1}' logs.txt
 
 Find lines with "login" and show the first column (like IP or date).
 
-## 🔹 Clean, deduplicate, and sort
+## Clean, deduplicate, and sort
 
 ```bash
 cat input.txt | sed '/^$/d' | sort | uniq > cleaned.txt
@@ -166,7 +166,7 @@ cat input.txt | sed '/^$/d' | sort | uniq > cleaned.txt
 
 Great for preparing tool output for wordlists.
 
-## 🔹 Exclude lines using grep
+## Exclude lines using grep
 
 ```bash
 grep -v "404" urls.txt
@@ -176,7 +176,7 @@ grep -v "404" urls.txt
 
 Removes 404 entries from HTTP scan results.
 
-## 🔹 Safe sed replace with backup
+## Safe sed replace with backup
 
 ```bash
 sed -i.bak 's/http:/https:/g' urls.txt
@@ -187,7 +187,7 @@ sed -i.bak 's/http:/https:/g' urls.txt
 
 Replaces all `http:` with `https:` and makes a `.bak` copy first.
 
-## 🔹 Extract JS files from mixed URLs
+## Extract JS files from mixed URLs
 
 ```bash
 grep '\.js' all.txt | sed 's|https\?://||' | sort -u > js.txt
@@ -211,4 +211,3 @@ Pulls `.js` links, removes protocols, deduplicates.
 - `cut`: Extract specific fields from lines
 - `tr`: Translate or delete characters
 - `jq`: Parse JSON output for similar use cases
-

