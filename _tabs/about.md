@@ -4,8 +4,6 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-# About Me
-
 Hey there! I'm **Yash**, a **cybersecurity enthusiast** who loves automating stuff, breaking things (in a good way), and building cool tools.I spend most of my time tinkering with tech — from **cloud security** to **DevOps**, and everything in between.
 
 I’m always up to something interesting — whether it’s automating security workflows, building custom pentesting tools, or just improving my Linux setup. I like working with **AWS**, **Docker**, and **CI/CD pipelines**, but what I love the most is finding creative ways to solve problems.
@@ -21,7 +19,7 @@ I’m always up to something interesting — whether it’s automating security 
 - **Cybersecurity**: Web app and network pentesting, cloud security, SIEM & SOC ops
 - **Cloud & DevOps**: **AWS**, **GCP**, **Azure**, Docker, Jenkins, Ansible, CI/CD pipelines
 - **Scripting**: Python, Bash, PowerShell, YAML (Basically, if it can be automated, I’m all in)
-- **System Admin**: Linux (RHEL, Ubuntu, CentOS), Windows exploitation, network security
+- **System Admin**: Linux (Arch, RHEL, Ubuntu, etc)
 
 ### What I Do When I’m Not Working
 

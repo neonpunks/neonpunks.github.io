@@ -9,8 +9,6 @@ image: /assets/images/Cyber-Security/One-Liners.png
 
 A curated collection of powerful, compact one-liners used throughout reconnaissance, scanning, and early exploitation workflows. These are quick-fire tools for chaining recon steps, automating scans, or rapidly discovering weak points.
 
----
-
 ## Subdomains → Live Hosts → Scan
 
 ```bash
