@@ -1,43 +1,33 @@
-# Chirpy Starter
+# Personal Notes Website
 
-[![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy)][gem]&nbsp;
-[![GitHub license](https://img.shields.io/github/license/cotes2020/chirpy-starter.svg?color=blue)][mit]
+Welcome to the codebase behind my personal website, proudly hosted via GitHub Pages at [https://neonpunks.github.io/](https://neonpunks.github.io/).
 
-When installing the [**Chirpy**][chirpy] theme through [RubyGems.org][gem], Jekyll can only read files in the folders
-`_data`, `_layouts`, `_includes`, `_sass` and `assets`, as well as a small part of options of the `_config.yml` file
-from the theme's gem. If you have ever installed this theme gem, you can use the command
-`bundle info --path jekyll-theme-chirpy` to locate these files.
+This site is a curated collection of resources, notes, and tools across areas I work with daily:
 
-The Jekyll team claims that this is to leave the ball in the user’s court, but this also results in users not being
-able to enjoy the out-of-the-box experience when using feature-rich themes.
+- **Cyber Security**
+- **DevOps and Automation**
+- **Linux Systems**
+- **ChatGPT Prompt Engineering**
+- **Other Useful Technical Topics**
 
-To fully use all the features of **Chirpy**, you need to copy the other critical files from the theme's gem to your
-Jekyll site. The following is a list of targets:
+## What You’ll Find Here
 
-```shell
-.
-├── _config.yml
-├── _plugins
-├── _tabs
-└── index.html
-```
+The website covers everything from quick one-liners to detailed how-to guides — whether you are setting up a hacking VPS, building a custom Docker image, or just need a fast AWS command reference without digging through pages of documentation.
 
-To save you time, and also in case you lose some files while copying, we extract those files/configurations of the
-latest version of the **Chirpy** theme and the [CD][CD] workflow to here, so that you can start writing in minutes.
+You’ll also find a dedicated section for ChatGPT prompts. These are real-world-tested prompts that make ChatGPT significantly sharper, faster, and more technically capable. If you rely on AI for development, security, or system design tasks, these prompts will help you get more out of every session.
 
-## Usage
+## Using the ChatGPT Prompts
 
-Check out the [theme's docs](https://github.com/cotes2020/jekyll-theme-chirpy/wiki).
+Getting started is simple:
 
-## Contributing
+1. Copy the prompt you want to use.
+2. Replace my name with yours wherever it appears.
+3. In the next message to ChatGPT, just type `commands` or `help` and hit Enter.
 
-This repository is automatically updated with new releases from the theme repository. If you encounter any issues or want to contribute to its improvement, please visit the [theme repository][chirpy] to provide feedback.
+This triggers a built-in guide explaining what the prompt can do and how to get the most out of it.  
+The “Zero Prompt” included here is optimized for handling a wide range of technical workflows with minimal tweaking.
 
-## License
+## Final Thoughts
 
-This work is published under [MIT][mit] License.
-
-[gem]: https://rubygems.org/gems/jekyll-theme-chirpy
-[chirpy]: https://github.com/cotes2020/jekyll-theme-chirpy/
-[CD]: https://en.wikipedia.org/wiki/Continuous_deployment
-[mit]: https://github.com/cotes2020/chirpy-starter/blob/master/LICENSE
+This project is an ongoing effort. My goal is to keep this site practical, to the point, and filled only with things that actually make a difference in real-world projects.  
+If it saves you even five minutes a day, it's doing its job.
